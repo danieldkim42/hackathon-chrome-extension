@@ -1,8 +1,27 @@
 // creating the baseball img
 const body = document.querySelector('body');
+const quotes = ["When you have a dream, you've got to grab it and never let go.",
+    "Nothing is impossible. The word itself says 'I'm possible!'",
+    "There is nothing impossible to they who will try.",
+    "The bad news is time flies. The good news is you're the pilot.",
+    "Life has got all those twists and turns. You've got to hold on tight and off you go.",
+    "Keep your face always toward the sunshine, and shadows will fall behind you.",
+    "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    "You define your own life. Don't let other people write your script.",
+    "You are never too old to set another goal or to dream a new dream.",
+    "When you are asked if you can do a job, tell em, Certainly I can! Then get busy and find out how to do it.",
+    "Confidence is 10% hard work and 90% delusion.",
+    "Hard work never killed anybody, but why take a chance?",
+    "Oh, you hate your job? Why didn’t you say so? There’s a support group for that. It’s called everybody, and they meet at the bar.",
+];
 
-// invoke our whole throw baseball and crack screen every x milliseconds
-const throwBall = setInterval(() => {
+
+function endGame() {
+    let index = Math.floor(Math.random() * quotes.length);
+    let quote = quotes[index];
+    confirm(quote + "\n\nWould you like to focus again?");
+}
+function throwBall() {
     let clicked = false;
     let node = document.createElement('img');
     node.setAttribute('id', 'baseball');
@@ -33,7 +52,7 @@ const throwBall = setInterval(() => {
     // no meaning just variables
     let currentBBWidth = 1;
     let currentBBHeight = 1;
-    const scaleFactor = 1.1;
+    const scaleFactor = 1.3;
     let deg = 0;
 
     const increaseSizeAndRotate = () => {
@@ -56,15 +75,20 @@ const throwBall = setInterval(() => {
                 crack.style.top = "0";
                 crack.style.left = "0";
                 crack.style.zIndex = "10000";
-                body.style.height = "100%";
-                body.style.width = "100%";
+                crack.style.height = "10000";
+                crack.style.width = "10000";
                 body.appendChild(crack);
+                setTimeout(endGame, 100);
             }
         } else {
             clearInterval(clickOrCrack);
         }
     }, 100);
+}
 
+// invoke our whole throw baseball and crack screen every x milliseconds
+const interval = setInterval(() => {
+    throwBall();
 }, 5000);
 
 // 300,000 ms is 5 min
